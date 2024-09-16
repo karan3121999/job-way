@@ -1,0 +1,37 @@
+{% extends 'auth/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="mb-5">
+            <h2 class="h4 text-center">LOGIN</h2>
+        </div>
+    </div>
+</div>
+<form class="pt-3" method="post">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+        <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3 position-relative">
+        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+        <label for="password">Password</label>
+        <a href="{% url 'password_reset_request' %}" class="position-absolute end-0 top-100 mt-1 me-2 small text-decoration-none">Forgot Password?</a>
+    </div>
+    <br>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-dark btn-lg">Login</button>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-12">
+        <p class="mb-0 mt-5 text-secondary text-center">Don't have an account? <a href="{% url 'user_signup' %}" class="link-primary text-decoration-none">Sign up</a></p>
+    </div>
+</div>
+
+{% endblock %}

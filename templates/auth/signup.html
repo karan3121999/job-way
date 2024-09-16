@@ -1,0 +1,89 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+    <div class="mb-5">
+        <h2 class="h4 text-center">SIGN UP</h2>
+    </div>
+
+
+    <!-- Tabs for Job Provider and Job Seeker -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_tab == 'job_provider' %}active{% endif %}" id="job_provider-tab" data-bs-toggle="tab" data-bs-target="#job_provider" type="button" role="tab" aria-controls="job_provider" aria-selected="{% if active_tab == 'job_provider' %}true{% else %}false{% endif %}">Job Provider</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_tab == 'job_seeker' %}active{% endif %}" id="job_seeker-tab" data-bs-toggle="tab" data-bs-target="#job_seeker" type="button" role="tab" aria-controls="job_seeker" aria-selected="{% if active_tab == 'job_seeker' %}true{% else %}false{% endif %}">Job Seeker</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <!-- Job Provider Tab Content -->
+        <div class="tab-pane fade {% if active_tab == 'job_provider' %}show active{% endif %}" id="job_provider" role="tabpanel" aria-labelledby="job_provider-tab">
+            <form class="pt-3" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" value="job_provider">
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="email" name="email" id="email_provider" placeholder="Email" required>
+                    <label for="email_provider">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" name="username" id="username_provider" placeholder="username" required>
+                    <label for="username_provider">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" name="password" id="password_provider" placeholder="Password" required>
+                    <label for="password_provider">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" name="confirm_password" id="confirm_password_provider" placeholder="Confirm Password" required>
+                    <label for="confirm_password_provider">Confirm Password</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="accepted" required id="terms_condition_provider" name="terms_condition">
+                    <label class="form-check-label" for="terms_condition_provider">
+                        I agree to the terms and conditions
+                    </label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark btn-lg">Sign Up</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Job Seeker Tab Content -->
+        <div class="tab-pane fade {% if active_tab == 'job_seeker' %}show active{% endif %}" id="job_seeker" role="tabpanel" aria-labelledby="job_seeker-tab">
+            <form class="pt-3" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" value="job_seeker">
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="email" name="email" id="email_seeker" placeholder="Email" required>
+                    <label for="email_seeker">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" name="username" id="username_provider" placeholder="username" required>
+                    <label for="username_provider">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" name="password" id="password_seeker" placeholder="Password" required>
+                    <label for="password_seeker">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" name="confirm_password" id="confirm_password_seeker" placeholder="Confirm Password" required>
+                    <label for="confirm_password_seeker">Confirm Password</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="accepted" required id="terms_condition_seeker" name="terms_condition">
+                    <label class="form-check-label" for="terms_condition_seeker">
+                        I agree to the terms and conditions
+                    </label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark btn-lg">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p class="mb-0 mt-5 text-secondary text-center">Already have an account? <a href="{% url 'user_login' %}" class="link-primary text-decoration-none">Login</a></p>
+{% endblock %}
